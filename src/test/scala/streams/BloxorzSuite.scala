@@ -95,12 +95,12 @@ class BloxorzSuite extends FunSuite {
     }
   }
 
-  test("from function") {
+  /*test("from function") {
     new Level1 {
       val test = from(Stream.cons((startBlock, List[Move]()), Stream.empty), Set[Block]())
       println(test.toList.take(3))
     }
-  }
+  }*/
 
   test("optimal solution for level 1") {
     new Level1 {

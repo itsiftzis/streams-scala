@@ -78,11 +78,11 @@ trait Solver extends GameDef {
     if (initial.isEmpty) Stream.empty
     else {
       val more = for {
-        init <- initial
-        if (!explored.contains(init._1))
-      } yield init
-      println(more)
-      initial.head #:: from(more, explored)
+        path <- initial
+        next <- newNeighborsOnly(neighborsWithHistory(path._1, path._2),explored)
+      } yield next
+      initial ++ from(more, explored ++ (more map (_._1)))
+
     }
   }
 
