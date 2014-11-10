@@ -68,15 +68,37 @@ class BloxorzSuite extends FunSuite {
       val test = newNeighborsOnly(
         Set(
           (Block(Pos(1,2),Pos(1,3)), List(Right,Left,Up)),
+          (Block(Pos(2,1),Pos(3,1)), List(Down,Left,Up)),
+          (Block(Pos(3,1),Pos(3,3)), List(Down,Down,Right))
+        ).toStream,
+
+        Set(Block(Pos(1,2),Pos(1,3)), Block(Pos(1,1),Pos(1,1)))
+      )
+      assert(test == Set(
+        (Block(Pos(2,1),Pos(3,1)), List(Down,Left,Up)),
+        (Block(Pos(3,1),Pos(3,3)), List(Down,Down,Right))
+      ).toStream)
+    }
+
+    new Level1 {
+      val test = newNeighborsOnly(
+        Set(
+          (Block(Pos(1,2),Pos(1,3)), List(Right,Left,Up)),
           (Block(Pos(2,1),Pos(3,1)), List(Down,Left,Up))
         ).toStream,
 
         Set(Block(Pos(1,2),Pos(1,3)), Block(Pos(1,1),Pos(1,1)))
       )
-      println(test)
       assert(test == Set(
         (Block(Pos(2,1),Pos(3,1)), List(Down,Left,Up))
       ).toStream)
+    }
+  }
+
+  test("from function") {
+    new Level1 {
+      val test = from(Stream.cons((startBlock, List[Move]()), Stream.empty), Set[Block]())
+      println(test.toList.take(3))
     }
   }
 
