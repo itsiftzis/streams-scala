@@ -135,7 +135,7 @@ trait GameDef {
      * the current block, together with the corresponding move.
      */
     def neighbors: List[(Block, Move)] = {
-      List((this.up, Up), (this.down, Down), (this.left, Left), (this.right, Right))
+      List((up, Up), (down, Down), (left, Left), (right, Right))
     }
 
     /**
@@ -147,7 +147,7 @@ trait GameDef {
     /**
      * Returns `true` if the block is standing.
      */
-    def isStanding: Boolean = b1 == b2
+    def isStanding: Boolean = b1.x == b2.x && b1.y == b2.y
 
     /**
      * Returns `true` if the block is entirely inside the terrain.

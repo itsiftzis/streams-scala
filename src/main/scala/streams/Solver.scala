@@ -10,7 +10,7 @@ trait Solver extends GameDef {
   /**
    * Returns `true` if the block `b` is at the final position
    */
-  def done(b: Block): Boolean = (b.b1 == goal || b.b2 == goal)
+  def done(b: Block): Boolean = (b.b1 == goal && b.b2 == goal)
 
   /**
    * This function takes two arguments: the current block `b` and
@@ -90,7 +90,7 @@ trait Solver extends GameDef {
    * The stream of all paths that begin at the starting block.
    */
   lazy val pathsFromStart: Stream[(Block, List[Move])] = {
-    from( Stream.cons( (startBlock, List[Move]()), Stream.empty), Set[Block]())
+    from( Stream.cons( (startBlock, List[Move]()), Stream.empty), Set[Block](startBlock))
   }
 
   /**
@@ -110,6 +110,6 @@ trait Solver extends GameDef {
    * position.
    */
   lazy val solution: List[Move] = {
-    (for (pathToGoal <- pathsToGoal) yield pathToGoal._2).toList.head
+    (for (p <- pathsToGoal) yield p._2).toList.reverse.head
   }
 }
