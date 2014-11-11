@@ -3,10 +3,9 @@ case class Pos(x: Int, y: Int) {
   def dy(d: Int) = copy(y = y + d)
 }
 type Terrain = Pos => Boolean
-
 def terrainFunction(levelVector: Vector[Vector[Char]]): Pos => Boolean = {
-  (pos: Pos) => (for (x <- 0 until levelVector.length-1;
-                      y <- 0 until levelVector.toList(x).length-1
+  (pos: Pos) => (for (x <- 0 until levelVector.length;
+                      y <- 0 until levelVector.apply(x).length
                       if (!levelVector.apply(x).apply(y).equals('-')
                         && pos.x == x && pos.y == y
                         )
@@ -25,3 +24,7 @@ lazy val terrain: Terrain = terrainFunction(vector)
   terrain(Pos(0,0))
   terrain(Pos(4,11))
   terrain(Pos(5,9))
+  terrain(Pos(3,9))
+  terrain(Pos(5,8))
+
+for (x<- 0 until vector.length; y<- 0 until vector.apply(x).length) yield y
