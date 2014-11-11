@@ -45,8 +45,8 @@ trait Solver extends GameDef {
     else if (explored.contains(neighbors.head._1))
       newNeighborsOnly(neighbors.tail, explored)
     else
-      neighbors.head #:: newNeighborsOnly(neighbors.tail, explored + neighbors.head._1)
-
+      (for (neighbor <- neighbors if (!explored.contains(neighbor._1)) )
+          yield neighbor).toStream
   }
 
   /**
