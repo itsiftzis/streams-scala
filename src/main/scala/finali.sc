@@ -27,4 +27,10 @@ lazy val terrain: Terrain = terrainFunction(vector)
   terrain(Pos(3,9))
   terrain(Pos(5,8))
 
-for (x<- 0 until vector.length; y<- 0 until vector.apply(x).length) yield y
+def findChar(c: Char, levelVector: Vector[Vector[Char]]): Pos = {
+  val x = levelVector.indexWhere( (innerVector: Vector[Char]) => innerVector.indexOf(c) > -1 )
+  val y = levelVector.toList(x).indexOf(c)
+  Pos(x,y)
+}
+
+lazy val goal: Pos = findChar('T', vector)

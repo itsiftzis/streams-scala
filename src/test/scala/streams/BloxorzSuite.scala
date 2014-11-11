@@ -33,7 +33,7 @@ class BloxorzSuite extends FunSuite {
     """ooo-------
       |oSoooo----
       |ooooooooo-
-      |-ooooooooo
+      |-ooooooooR
       |-----ooToo
       |------ooo-""".stripMargin
 
@@ -54,6 +54,8 @@ class BloxorzSuite extends FunSuite {
       assert(startPos == Pos(1,1))
       lazy val tPos: Pos = findChar('T', Vector(level.split("\n").map(str => Vector(str: _*)): _*))
       assert(tPos == Pos(4,7))
+      lazy val rPos: Pos = findChar('R', Vector(level.split("\n").map(str => Vector(str: _*)): _*))
+      assert(rPos == Pos(3,9))
     }
   }
 

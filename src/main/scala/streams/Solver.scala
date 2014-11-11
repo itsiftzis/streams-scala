@@ -97,7 +97,7 @@ trait Solver extends GameDef {
    * with the history how it was reached.
    */
   lazy val pathsToGoal: Stream[(Block, List[Move])] = {
-    for (path <- pathsFromStart if (!done(path._1))) yield path
+    for (path <- pathsFromStart if (done(path._1))) yield path
   }
 
   /**
@@ -109,6 +109,8 @@ trait Solver extends GameDef {
    * position.
    */
   lazy val solution: List[Move] = {
-    (for (p <- pathsToGoal) yield p._2).toList.reverse.head
+    if (pathsToGoal.isEmpty) List()
+    else
+      (for (p <- pathsToGoal) yield p._2).toList.reverse.head
   }
 }
